@@ -34,7 +34,7 @@ const RestaurantCategories = ({
 
     selectedCategory.products.forEach(product => console.log(product.name));
   return (
-    <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-gray-100 ">
+    <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-gray-100 flex-auto">
       <div className="p-4">
         <div className="flex items-center gap-3">
             <div className="relative h-[45px] w-[45px]">
