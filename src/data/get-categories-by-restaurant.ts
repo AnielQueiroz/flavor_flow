@@ -15,6 +15,5 @@ export const getCategoriesByRestaurant = async ({ restaurantId, withProducts = f
             products: withProducts
         }
     });
-    console.log(categories);
     return categories;
 };
