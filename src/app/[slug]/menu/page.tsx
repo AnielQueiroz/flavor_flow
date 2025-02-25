@@ -36,7 +36,7 @@ const RestaurantMenuPage = async ({
   const categoriesAndProducts = await getCategoriesByRestaurant({ restaurantId: restaurant.id, withProducts: true });
 
   return (
-    <div>
+    <div className="flex flex-col flex-grow">
       <RestaurantHeader restaurant={restaurant} />
       {/* Renderiza as categorias e produtos do restaurante */}
       {categoriesAndProducts ? (
