@@ -8,6 +8,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
+import ProductsList from "./products";
+
 type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
   include: {
       products: true;
@@ -32,7 +34,7 @@ const RestaurantCategories = ({
 
     selectedCategory.products.forEach(product => console.log(product.name));
   return (
-    <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl border bg-white">
+    <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-gray-100 ">
       <div className="p-4">
         <div className="flex items-center gap-3">
             <div className="relative h-[45px] w-[45px]">
@@ -65,6 +67,9 @@ const RestaurantCategories = ({
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
+
+      <h3 className="font-semibold p-5 pt-2">{selectedCategory.name}</h3>
+      <ProductsList products={selectedCategory.products} />
     </div>
   );
 };
