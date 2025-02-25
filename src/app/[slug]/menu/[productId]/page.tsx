@@ -13,11 +13,7 @@ interface ProductPageProps {
 const ProductPage = async ({ params } : ProductPageProps) => {
     const { slug, productId } = await params;
     const product = await getProductsById(productId);
-    if (!product) {
-        return <NotFoundPage />;
-    }
-
-    if (product.restaurant.slug.toUpperCase() !== slug.toUpperCase()) {
+    if (!product || product.restaurant.slug.toUpperCase() !== slug.toUpperCase()) {
         return <NotFoundPage />;
     }
 
