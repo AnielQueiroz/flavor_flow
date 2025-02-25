@@ -42,7 +42,7 @@ export default function RootLayout({
         </header>
 
         {/* Conteúdo principal */}
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow flex flex-col">{children}</main>
 
         {/* Footer */}
         <footer className="bg-white py-6 text-center text-gray-500">
