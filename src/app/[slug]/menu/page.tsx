@@ -35,8 +35,6 @@ const RestaurantMenuPage = async ({
   // Busca as categorias e produtos do restaurante
   const categoriesAndProducts = await getCategoriesByRestaurant({ restaurantId: restaurant.id, withProducts: true });
 
-  console.log(categoriesAndProducts);
-
   return (
     <div>
       <RestaurantHeader restaurant={restaurant} />
