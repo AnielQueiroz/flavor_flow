@@ -1,6 +1,6 @@
 "use client";
 
-import { Prisma } from "@prisma/client";
+import { Prisma, Restaurant } from "@prisma/client";
 import { ClockIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -8,28 +8,23 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
+type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
+  include: {
+      products: true;
+  }
+}>
+
 interface RestaurantCategoriesProps {
-  restaurant: Prisma.RestaurantGetPayload<{
-    include: {
-        menuCategories: {
-            include: {
-                products: true;
-            }
-        };
-    };
-  }>;
+  categories: MenuCategoriesWithProducts[];
+  restaurant: Pick<Restaurant, "avatarImageUrl" | "description" | "name">;
 }
 
-type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
-    include: {
-        products: true;
-    }
-}>
 
 const RestaurantCategories = ({
   restaurant,
+  categories
 }: RestaurantCategoriesProps) => {  
-    const [selectedCategory, setSelectedCategory] = useState<MenuCategoriesWithProducts>(restaurant.menuCategories[0]);
+    const [selectedCategory, setSelectedCategory] = useState<MenuCategoriesWithProducts>(categories[0]);
     const handleCategoryClick = (category: MenuCategoriesWithProducts) => setSelectedCategory(category);
     const getCategoryButtonVariant = (category: MenuCategoriesWithProducts) => {
         return selectedCategory.id === category.id ? "default" : "secondary"
@@ -62,7 +57,7 @@ const RestaurantCategories = ({
 
       <ScrollArea className="w-full">
         <div className="flex w-max space-x-4 p-4 pt-0">
-            {restaurant.menuCategories.map(category => (
+            {categories.map(category => (
                 <Button key={category.id} onClick={() => handleCategoryClick(category)} variant={getCategoryButtonVariant(category)} size="sm" className="rounded-full">
                     {category.name} 
                 </Button>
