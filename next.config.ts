@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         hostname: 'u9a6wmr3as.ufs.sh'
+      },
+      {
+        hostname: 'res.cloudinary.com'
       }
     ]
   }
