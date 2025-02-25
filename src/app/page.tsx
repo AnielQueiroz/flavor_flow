@@ -16,7 +16,7 @@ const HomePage = async () => {
   const restaurants = await getRestaurants();
 
   return (
-    <div className="h-full">
+    <div className="flex flex-col h-full">
       {/* Barra de busca */}
       <div className="mx-auto px-4 mt-6">
         <div className="bg-white p-4 rounded-lg shadow-md flex items-center">
