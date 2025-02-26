@@ -32,8 +32,8 @@ const ProductDetails = ({ product } : ProductDetailsProps) => {
     const handleIncreaseQuantity = () => setQuantity(quantity + 1);
     const getDecreaseButtonVariant = () => quantity === 1 ? "secondary" : "default";
     return ( 
-        <div className="relative z-50 rounded-t-3xl py-5 mt-[-1.5rem] p-5 bg-gray-100 flex-auto flex flex-col overflow-hidden">
-            <div className="flex-auto overflow-hidden">
+        <div className="relative z-50 rounded-t-3xl py-5 pb-2 mt-[-1.5rem] p-5 bg-gray-100 flex-auto flex flex-col overflow-hidden">
+            <div className="h-[100%] overflow-hidden">
                 {/* Restaurante */}
                 <div className="flex items-center gap-1">
                     <Image src={product.restaurant.avatarImageUrl} alt={product.restaurant.name} width={30} height={30} className="rounded-full" />
@@ -59,7 +59,8 @@ const ProductDetails = ({ product } : ProductDetailsProps) => {
                     </div>
                 </div>
 
-                <ScrollArea className="h-full">
+                {/* Scroll Area */}
+                <ScrollArea className="h-[20rem]">                    
                     {/* Sobre */}
                     <div className="mt-6 space-y-3">
                         <h4 className="font-semibold">Sobre</h4>
@@ -67,22 +68,27 @@ const ProductDetails = ({ product } : ProductDetailsProps) => {
                     </div>
 
                     {/* Ingredientes */}
-                    <div className="mt-6 space-y-3">
-                        <div className="flex items-center gap-1">
-                            <ChefHatIcon size={18} />
-                            <h4 className="font-semibold">Ingredientes</h4>
+                    {product.ingredients.length > 0 && (
+                        <div className="mt-6 mb-3 space-y-3">
+                            <div className="flex items-center gap-1">
+                                <ChefHatIcon size={18} />
+                                <h4 className="font-semibold">Ingredientes</h4>
+                            </div>
+                            <ul className="list-disc list-inside text-sm text-muted-foreground">
+                                {product.ingredients.map((ingredient) => (
+                                    console.log(ingredient),
+                                    <li key={ingredient}>{ingredient}</li>
+                                ))}
+                            </ul>
                         </div>
-                        <ul className="list-disc list-inside text-sm text-muted-foreground">
-                            {product.ingredients.map((ingredient) => (
-                                <li key={ingredient}>{ingredient}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    )}
+                    
+       
                 </ScrollArea>
             </div>
 
             {/* Botão de adicionar a sacola */}
-            <Button variant={"default"} className="mt-2 w-full rounded-full">
+            <Button variant={"default"} className="w-full rounded-full">
                 Adicionar à sacola
             </Button>
         </div> 
