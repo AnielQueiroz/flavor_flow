@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${poppins.className} antialiased flex flex-col min-h-screen`}>
         {/* Header */}
-        <header className="flex items-center justify-between bg-white shadow-sm py-4">
+        <header className="flex items-center justify-between bg-white shadow-sm py-2">
           <Link href="/">
             <div className="flex items-center">
               <Image src="/logo.png" alt="Flavor Flow" width={50} height={50} />
@@ -42,14 +42,14 @@ export default function RootLayout({
         </header>
 
         {/* Conteúdo principal */}
-        <main className="flex-grow flex flex-col">{children}</main>
+        <main className="h-full flex flex-col">{children}</main>
 
         {/* Footer */}
-        <footer className="bg-white py-6 text-center text-gray-500">
-          <div className="container mx-auto px-4">
-            <p>© 2023 Flavor Flow. Todos os direitos reservados.</p>
+        {/* <footer className="bg-white py-1 text-center">
+          <div className="container mx-auto p-3">
+            <p className="text-sm text-muted-foreground">© 2025 Flavor Flow. Todos os direitos reservados.</p>
           </div>
-        </footer>
+        </footer> */}
       </body>
     </html>
   );
