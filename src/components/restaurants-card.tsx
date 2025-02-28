@@ -9,7 +9,7 @@ interface RestaurantCardProps {
 }
 
 const RestaurantsCards = ({ restaurant } : RestaurantCardProps) => {
-    return <Link href={`/${restaurant.slug}`}>
+    return <Link href={`/${restaurant.slug}/menu`}>
         <Card>
             <CardContent key={restaurant.id} className="flex flex-col gap-4 p-0">
                 <div className="relative w-full h-40">
