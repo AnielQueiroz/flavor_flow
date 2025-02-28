@@ -5,8 +5,12 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
+
+import { CartProvider } from "./[slug]/menu/context/cart";
+import Loading from "./loading";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -42,7 +46,13 @@ export default function RootLayout({
         </header>
 
         {/* Conteúdo principal */}
-        <main className="h-full flex flex-col">{children}</main>
+        {/* <main className="h-full flex flex-col"> */}
+        <Suspense fallback={<Loading />}>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </Suspense>
+        {/* </main> */}
 
         {/* Footer */}
         {/* <footer className="bg-white py-1 text-center">
