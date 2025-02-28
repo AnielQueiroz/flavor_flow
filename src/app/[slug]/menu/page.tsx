@@ -11,20 +11,20 @@ interface RestaurantMenuPageProps {
   searchParams: Promise<{ consumptionMethod: string }>;
 }
 
-const isConsumptionMethodValid = (consumptionMethod: string) => {
-  return ["DINE_IN", "TAKEAWAY"].includes(consumptionMethod.toUpperCase());
-};
+// const isConsumptionMethodValid = (consumptionMethod: string) => {
+//   return ["DINE_IN", "TAKEAWAY"].includes(consumptionMethod.toUpperCase());
+// };
 
 const RestaurantMenuPage = async ({
   params,
-  searchParams,
+  // searchParams,
 }: RestaurantMenuPageProps) => {
   // Pega o slug do restaurante e o método de consumo da URL
   const { slug } = await params;
-  const { consumptionMethod } = await searchParams;
-  if (!isConsumptionMethodValid(consumptionMethod)) {
-    return notFound();
-  }
+  // const { consumptionMethod } = await searchParams;
+  // if (!isConsumptionMethodValid(consumptionMethod)) {
+  //   return notFound();
+  // }
 
   // Busca o restaurante pelo slug
   const restaurant = await getRestaurantBySlug(slug);
