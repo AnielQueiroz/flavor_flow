@@ -1,5 +1,3 @@
-// import { notFound } from "next/navigation";
-
 import NotFoundPage from "@/components/not-found";
 import { getProductsById } from "@/data/get-products-by-id";
 
