@@ -1,7 +1,7 @@
 "use client";
 
-import { Product } from "@prisma/client";
-import { createContext, ReactNode, useState } from "react";
+import type { Product } from "@prisma/client";
+import { createContext, type ReactNode, useState } from "react";
 
 interface CartProduct extends Pick<Product, "id" | "name" | "price" | "imageUrl"> {
     quantity: number;
@@ -29,19 +29,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     
     const toggleCart = () => setIsOpen(!isOpen);
     const addProduct = (product: CartProduct) => {
+        // Encontra o índice do produto no array de produtos com base no ID
         const index = products.findIndex((p) => p.id === product.id);
+    
+        // Se o produto não estiver no array (index === -1), adiciona o novo produto ao array
         if (index === -1) {
             setProducts([...products, product]);
         } else {
+            // Se o produto já estiver no array, atualiza a quantidade do produto existente
             const updatedProducts = products.map((p) => {
                 if (p.id === product.id) {
                     return {
-                        ...p,
-                        quantity: p.quantity + product.quantity,
+                        ...p, // Mantém as outras propriedades do produto
+                        quantity: p.quantity + product.quantity, // Atualiza a quantidade
                     };
                 }
-                return p;
+                return p; // Retorna o produto sem alterações se o ID não corresponder
             });
+            // Atualiza o estado dos produtos com o array atualizado
             setProducts(updatedProducts);
         }
     };
