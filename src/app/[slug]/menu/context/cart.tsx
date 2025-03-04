@@ -28,27 +28,52 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [products, setProducts] = useState<CartProduct[]>([]);
     
     const toggleCart = () => setIsOpen(!isOpen);
-    const addProduct = (product: CartProduct) => {
-        // Encontra o índice do produto no array de produtos com base no ID
-        const index = products.findIndex((p) => p.id === product.id);
+    // MINHA IMPLEMENTAÇÃO
+    // const addProduct = (product: CartProduct) => {
+    //     // Encontra o índice do produto no array de produtos com base no ID
+    //     const index = products.findIndex((p) => p.id === product.id);
     
-        // Se o produto não estiver no array (index === -1), adiciona o novo produto ao array
-        if (index === -1) {
-            setProducts([...products, product]);
-        } else {
-            // Se o produto já estiver no array, atualiza a quantidade do produto existente
-            const updatedProducts = products.map((p) => {
-                if (p.id === product.id) {
+    //     // Se o produto não estiver no array (index === -1), adiciona o novo produto ao array
+    //     if (index === -1) {
+    //         setProducts([...products, product]);
+    //     } else {
+    //         // Se o produto já estiver no array, atualiza a quantidade do produto existente
+    //         const updatedProducts = products.map((p) => {
+    //             if (p.id === product.id) {
+    //                 return {
+    //                     ...p, // Mantém as outras propriedades do produto
+    //                     quantity: p.quantity + product.quantity, // Atualiza a quantidade
+    //                 };
+    //             }
+    //             return p; // Retorna o produto sem alterações se o ID não corresponder
+    //         });
+    //         // Atualiza o estado dos produtos com o array atualizado
+    //         setProducts(updatedProducts);
+    //     }
+    // };
+
+    // FSW - DONALDS
+    const addProduct = (product: CartProduct) => {
+        // Verifica se o produto já está no carrinho
+        const productIsAlreadyInCart = products.some(prevProduct => prevProduct.id === product.id);
+        
+        // Se o produto não estiver no carrinho, adiciona o novo produto ao array de produtos
+        if (!productIsAlreadyInCart) {
+            return setProducts((prevProducts) => [...prevProducts, product]);
+        }
+
+        // Se o produto já estiver no carrinho, atualiza a quantidade do produto existente
+        setProducts(prevProducts => {
+            return prevProducts.map(prevProduct => {
+                if (prevProduct.id === product.id) {
                     return {
-                        ...p, // Mantém as outras propriedades do produto
-                        quantity: p.quantity + product.quantity, // Atualiza a quantidade
+                        ...prevProduct, // Mantém as outras propriedades do produto
+                        quantity: prevProduct.quantity + product.quantity // Atualiza a quantidade
                     };
                 }
-                return p; // Retorna o produto sem alterações se o ID não corresponder
+                return prevProduct; // Retorna o produto sem alterações se o ID não corresponder
             });
-            // Atualiza o estado dos produtos com o array atualizado
-            setProducts(updatedProducts);
-        }
+        });
     };
     const removeProduct = (productId: string) => {
         const updatedProducts = products.filter((p) => p.id !== productId);
