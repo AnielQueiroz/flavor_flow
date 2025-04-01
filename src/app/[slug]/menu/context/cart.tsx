@@ -57,6 +57,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     // };
 
     // FSW - DONALDS
+    
     const addProduct = (product: CartProduct) => {
         // Verifica se o produto já está no carrinho
         const productIsAlreadyInCart = products.some(prevProduct => prevProduct.id === product.id);
